@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Metadata -->
+    <meta name="description" content="Rare finds, Trending now, Real links, Ruthlessly filtered">
+    <meta name="author" content="Codexael">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Codexael Finds — Curated Picks">
+    <meta property="og:description" content="Rare finds, Trending now, Real links, Ruthlessly filtered">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/images/codexael_icon.svg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Codexael Finds — Curated Picks">
+    <meta name="twitter:description" content="Rare finds, Trending now, Real links, Ruthlessly filtered">
+    <meta name="twitter:image" content="assets/images/codexael_icon.svg">
+
+    <!-- Favicon / App Icon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/codexael_icon.svg">
+    <link rel="apple-touch-icon" href="assets/images/codexael_icon.svg">
+
+    <title>Codexael Finds — Curated Picks</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+
+<body>
+
+    <!-- ── Custom Cursor ── -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- ── Atmosphere ── -->
+    <div class="grid-overlay"></div>
+    <div class="noise"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="page-wrap">
+
+        <!-- ── Affiliate Notice ── -->
+        <div class="affiliate-notice">
+            ✦ Links on this page are affiliate links — we may earn a commission at no extra cost to you ✦
+        </div>
+
+        <!-- ── Top Bar ── -->
+        <header class="top-bar">
+            <div class="logo-wrap">
+                <div class="logo-mark">Codex<span>ael</span></div>
+                <span class="logo-sub">// Finds</span>
+            </div>
+            <div class="top-bar-right">
+                <div class="status-pill">
+                    <span class="status-dot"></span>
+                    Recently Added
+                </div>
+            </div>
+        </header>
+
+        <!-- ── Hero Strip ── -->
+        <section class="hero-strip">
+            <p class="eyebrow">// 002 — Curated Picks</p>
+            <h1 class="hero-headline">
+                Codexael
+                <span class="accent-line">Finds.</span>
+            </h1>
+            <p class="hero-sub">
+                Rare finds, Trending now, Real links, Ruthlessly filtered
+            </p>
+        </section>
+
+        <!-- ── Stats Bar ── -->
+        <div class="stats-bar">
+            <div class="stat-cell">
+                <span class="stat-num" id="stat-total">0</span>
+                <span class="stat-label">Total Picks</span>
+            </div>
+            <div class="stat-cell">
+                <span class="stat-num" id="stat-showing">0</span>
+                <span class="stat-label">Showing</span>
+            </div>
+            <div class="stat-cell">
+                <span class="stat-num" id="stat-categories">0</span>
+                <span class="stat-label">Categories</span>
+            </div>
+        </div>
+
+        <!-- ── Controls Bar ── -->
+        <div class="controls-bar">
+
+            <!-- Global search -->
+            <div class="search-wrap">
+                <span class="search-icon">⌕</span>
+                <input type="text" id="searchInput" placeholder="Search product" autocomplete="off"
+                    spellcheck="false">
+                <button class="clear-search-btn" id="clearSearch" title="Clear search">✕</button>
+            </div>
+
+            <!-- Filter dropdowns -->
+            <div class="dropdowns-group">
+
+                <!-- Category -->
+                <div class="filter-dropdown" id="dd-category">
+                    <button class="fdd-btn" onclick="toggleDD('dd-category')">
+                        Category <span class="fdd-chevron">▾</span>
+                    </button>
+                    <div class="fdd-panel" id="panel-category"></div>
+                </div>
+
+                <!-- Badge -->
+                <div class="filter-dropdown" id="dd-badge">
+                    <button class="fdd-btn" onclick="toggleDD('dd-badge')">
+                        Badge <span class="fdd-chevron">▾</span>
+                    </button>
+                    <div class="fdd-panel" id="panel-badge"></div>
+                </div>
+
+                <!-- Tag -->
+                <div class="filter-dropdown" id="dd-tag">
+                    <button class="fdd-btn" onclick="toggleDD('dd-tag')">
+                        Tag <span class="fdd-chevron">▾</span>
+                    </button>
+                    <div class="fdd-panel" id="panel-tag"></div>
+                </div>
+
+            </div><!-- /dropdowns-group -->
+
+            <!-- Sort controls -->
+            <div class="sort-wrap">
+                <span class="sort-label">Sort —</span>
+                <button class="sort-btn active" data-sort="default" onclick="setSort(this)">Default</button>
+                <button class="sort-btn" data-sort="name-asc" onclick="setSort(this)">A–Z</button>
+                <button class="sort-btn" data-sort="name-desc" onclick="setSort(this)">Z–A</button>
+                <button class="sort-btn" data-sort="price-asc" onclick="setSort(this)">Price ↑</button>
+                <button class="sort-btn" data-sort="price-desc" onclick="setSort(this)">Price ↓</button>
+            </div>
+
+        </div><!-- /controls-bar -->
+
+        <!-- ── Active Filter Chips ── -->
+        <div class="chips-bar" id="chipsBar"></div>
+
+        <!-- ── Products ── -->
+        <main class="products-section">
+
+            <div class="section-head">
+                <span class="section-head-label">// Picks</span>
+                <div class="section-head-line"></div>
+                <span class="section-head-label" id="pickCount">12 Items</span>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Cards are injected by app.js -->
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">⊘</div>
+                    <div class="empty-title">No Picks Found</div>
+                    <div class="empty-sub">Try adjusting filters or clearing the search</div>
+                </div>
+            </div>
+
+            <!-- Lazy-load trigger + spinner -->
+            <div class="load-sentinel" id="loadSentinel">
+                <div class="load-spinner" id="loadSpinner"></div>
+            </div>
+
+        </main>
+
+        <!-- ── Marquee ── -->
+        <div class="marquee-wrap" aria-hidden="true">
+            <div class="marquee-track" id="marqueeTrack"></div>
+        </div>
+
+        <!-- ── Footer ── -->
+        <footer class="bottom-bar">
+            <span class="copyright">© 2025 Codexael. All rights reserved.</span>
+            <span class="tagline">The Overlooked Shelf</span>
+            <nav class="social-links">
+                <a href="mailto:contact@codexael.com" class="social-link">Email</a>
+            </nav>
+        </footer>
+
+    </div><!-- /page-wrap -->
+
+    <!-- App logic -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
