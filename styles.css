@@ -1,29 +1,3 @@
-/* ============================================================
-   CODEXAEL FINDS — styles.css
-   Sections:
-     1. Tokens & Reset
-     2. Cursor
-     3. Atmosphere (grid, noise, blobs)
-     4. Layout shell
-     5. Top Bar / Nav
-     6. Affiliate Notice
-     7. Hero Strip
-     8. Stats Bar
-     9. Controls Bar
-    10. Search Input
-    11. Filter Dropdowns
-    12. Sort Controls
-    13. Active Filter Chips
-    14. Products Section & Grid
-    15. Empty State
-    16. Product Card
-    17. Lazy-load Spinner
-    18. Marquee
-    19. Footer
-    20. Responsive
-   ============================================================ */
-
-
 /* ── 1. Tokens & Reset ───────────────────────────────────── */
 
 :root {
@@ -846,7 +820,7 @@ body {
     overflow: hidden;
     opacity: 0;
     transform: translateY(22px);
-    transition:  opacity 0.45s ease, transform 0.3s ease, background 0.25s, box-shadow 0.3s ease;
+    transition: opacity 0.45s ease, transform 0.3s ease, background 0.25s, box-shadow 0.3s ease;
 }
 
 .product-card.in-view {
@@ -856,8 +830,8 @@ body {
 
 .product-card:hover {
     background: var(--surface2);
-    transform:   translateY(-4px);
-    box-shadow:  0 12px 40px rgba(232, 255, 0, 0.07), 0 4px  16px rgba(0, 0, 0, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(232, 255, 0, 0.07), 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 /* Accent border on hover */
@@ -1133,11 +1107,45 @@ body {
 /* ── 19. Footer ──────────────────────────────────────────── */
 
 .bottom-bar {
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.footer-top {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.footer-disclosure {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    opacity: 0.6;
+    line-height: 1.8;
+    max-width: 700px;
+}
+
+.footer-image-notice {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    color: rgba(232, 255, 0, 0.35);
+    text-transform: uppercase;
+}
+
+.footer-bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.5rem 3rem;
-    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .copyright {
@@ -1154,9 +1162,10 @@ body {
     color: var(--muted);
 }
 
-.social-links {
+.footer-links {
     display: flex;
-    gap: 1rem;
+    gap: 1.2rem;
+    flex-wrap: wrap;
 }
 
 .social-link {
@@ -1215,4 +1224,29 @@ body {
     .search-wrap {
         max-width: 100%;
     }
+}
+
+.nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.nav-link:hover {
+    color: var(--accent);
+}
+
+.notice-link {
+    color: rgba(232, 255, 0, 0.7);
+    text-decoration: underline;
+    text-decoration-color: rgba(232, 255, 0, 0.3);
+    letter-spacing: inherit;
+}
+
+.notice-link:hover {
+    color: var(--accent);
 }

@@ -1,6 +1,23 @@
 /* ── 1. Product Data ─────────────────────────────────────── */
 
-const PRODUCTS = [];
+const PRODUCTS = [
+    {
+        id: 1,
+        name: 'Sleeping Cat Plush Toy',
+        category: 'toys-games',
+        catLabel: 'Toys & Games',
+        badge: 'deal',
+        price: 249,
+        pLabel: 'Now At',
+        pDisplay: '₹249',
+        pOld: '₹899',
+        desc: 'A realistic sleeping cat plush toy with soft premium fur and calming breathing sound effects. Perfect as a stress-relief companion, cute desk decor, or a cozy gift for kids and cat lovers.',
+        tags: ['Soft Toy', 'Cat Plush', 'Sound Effect', 'Stress Relief', 'Kids Gift', 'Desk Decor'],
+        icon: '🐱',
+        bg: 'linear-gradient(135deg,#c79b6e,#8b5e3c)',
+        link: 'https://amzn.to/3PqDIub'
+    }
+];
 
 
 /* ── 2. App State ────────────────────────────────────────── */

@@ -31,11 +31,13 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
 <body>
@@ -54,21 +56,26 @@
 
         <!-- ── Affiliate Notice ── -->
         <div class="affiliate-notice">
-            ✦ Links on this page are affiliate links — we may earn a commission at no extra cost to you ✦
+            ✦ Codexael Finds is a participant in the Amazon Services LLC Associates Program — we earn a commission at no
+            extra cost to you ✦ &nbsp;|&nbsp; <a href="disclosure.html" class="notice-link">Full Disclosure</a> ✦
         </div>
 
         <!-- ── Top Bar ── -->
         <header class="top-bar">
             <div class="logo-wrap">
-                <div class="logo-mark">Codex<span>ael</span></div>
-                <span class="logo-sub">// Finds</span>
+                <a href="index.html" style="text-decoration:none;">
+                    <div class="logo-mark">Codex<span>ael</span></div>
+                    <span class="logo-sub">// Finds</span>
+                </a>
             </div>
-            <div class="top-bar-right">
+            <nav class="top-bar-right">
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
                 <div class="status-pill">
                     <span class="status-dot"></span>
                     Recently Added
                 </div>
-            </div>
+            </nav>
         </header>
 
         <!-- ── Hero Strip ── -->
@@ -105,8 +112,7 @@
             <!-- Global search -->
             <div class="search-wrap">
                 <span class="search-icon">⌕</span>
-                <input type="text" id="searchInput" placeholder="Search product" autocomplete="off"
-                    spellcheck="false">
+                <input type="text" id="searchInput" placeholder="Search product" autocomplete="off" spellcheck="false">
                 <button class="clear-search-btn" id="clearSearch" title="Clear search">✕</button>
             </div>
 
@@ -186,11 +192,27 @@
 
         <!-- ── Footer ── -->
         <footer class="bottom-bar">
-            <span class="copyright">© 2025 Codexael. All rights reserved.</span>
-            <span class="tagline">The Overlooked Shelf</span>
-            <nav class="social-links">
-                <a href="mailto:contact@codexael.com" class="social-link">Email</a>
-            </nav>
+            <div class="footer-top">
+                <p class="footer-disclosure">
+                    Codexael Finds is a participant in the Amazon Services LLC Associates Program, an affiliate
+                    advertising program designed to provide a means for sites to earn advertising fees by advertising
+                    and linking to Amazon.com.
+                </p>
+                <p class="footer-image-notice">
+                    ✦ Images may be digitally enhanced for promotional presentation purposes.
+                </p>
+            </div>
+            <div class="footer-bottom">
+                <span class="copyright">© 2025 Codexael. All rights reserved.</span>
+                <nav class="footer-links">
+                    <a href="about.html" class="social-link">About</a>
+                    <a href="contact.html" class="social-link">Contact</a>
+                    <a href="privacy-policy.html" class="social-link">Privacy Policy</a>
+                    <a href="disclosure.html" class="social-link">Affiliate Disclosure</a>
+                    <a href="mailto:contact@codexael.com" class="social-link">Email</a>
+                </nav>
+                <span class="tagline">The Overlooked Shelf</span>
+            </div>
         </footer>
 
     </div><!-- /page-wrap -->

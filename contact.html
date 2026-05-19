@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Contact Codexael Finds — get in touch with us.">
+    <meta name="author" content="Codexael">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Contact — Codexael Finds</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/codexael_icon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="page-styles.css">
+</head>
+<body>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+    <div class="grid-overlay"></div>
+    <div class="noise"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="page-wrap">
+
+        <div class="affiliate-notice">
+            ✦ Codexael Finds is a participant in the Amazon Services LLC Associates Program — we earn a commission at no extra cost to you ✦ &nbsp;|&nbsp; <a href="disclosure.html" class="notice-link">Full Disclosure</a> ✦
+        </div>
+
+        <header class="top-bar">
+            <div class="logo-wrap">
+                <a href="index.html" style="text-decoration:none;">
+                    <div class="logo-mark">Codex<span>ael</span></div>
+                    <span class="logo-sub">// Finds</span>
+                </a>
+            </div>
+            <nav class="top-bar-right">
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link" style="color:var(--accent)">Contact</a>
+                <div class="status-pill">
+                    <span class="status-dot"></span>
+                    Recently Added
+                </div>
+            </nav>
+        </header>
+
+        <main class="page-content">
+            <p class="page-eyebrow">// Say Hello</p>
+            <h1 class="page-title">Get In<br><span>Touch.</span></h1>
+
+            <div class="page-section">
+                <p>Have a product suggestion? A question about a pick? Found something broken on the site? We read every message.</p>
+                <p>You can also reach us directly at <a href="mailto:contact@codexael.com">contact@codexael.com</a></p>
+            </div>
+
+            <div class="page-section">
+                <h2>Send a Message</h2>
+                <form class="contact-form" action="mailto:contact@codexael.com" method="post" enctype="text/plain">
+                    <div class="form-group">
+                        <label class="form-label" for="contact-name">Your Name</label>
+                        <input class="form-input" type="text" id="contact-name" name="name" placeholder="How should we call you?" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="contact-email">Email Address</label>
+                        <input class="form-input" type="email" id="contact-email" name="email" placeholder="your@email.com" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="contact-subject">Subject</label>
+                        <input class="form-input" type="text" id="contact-subject" name="subject" placeholder="Product suggestion, question, etc." autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="contact-message">Message</label>
+                        <textarea class="form-textarea" id="contact-message" name="message" placeholder="Tell us what's on your mind…"></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send Message →</button>
+                </form>
+            </div>
+
+            <hr class="page-divider">
+
+            <div class="page-section">
+                <h2>What We Respond To</h2>
+                <ul>
+                    <li>Product submissions and suggestions</li>
+                    <li>Broken links or incorrect information</li>
+                    <li>General questions about the site</li>
+                    <li>Press or collaboration inquiries</li>
+                </ul>
+                <p style="margin-top:1rem;">We aim to respond within 2–3 business days.</p>
+            </div>
+        </main>
+
+        <footer class="bottom-bar">
+            <div class="footer-top">
+                <p class="footer-disclosure">Codexael Finds is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com.</p>
+                <p class="footer-image-notice">✦ Images may be digitally enhanced for promotional presentation purposes.</p>
+            </div>
+            <div class="footer-bottom">
+                <span class="copyright">© 2025 Codexael. All rights reserved.</span>
+                <nav class="footer-links">
+                    <a href="about.html" class="social-link">About</a>
+                    <a href="contact.html" class="social-link">Contact</a>
+                    <a href="privacy-policy.html" class="social-link">Privacy Policy</a>
+                    <a href="disclosure.html" class="social-link">Affiliate Disclosure</a>
+                    <a href="mailto:contact@codexael.com" class="social-link">Email</a>
+                </nav>
+                <span class="tagline">The Overlooked Shelf</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        const curEl = document.getElementById('cursor');
+        const ringEl = document.getElementById('cursorRing');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX; my = e.clientY;
+            curEl.style.left = mx + 'px'; curEl.style.top = my + 'px';
+        });
+        (function animateRing() {
+            rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+            ringEl.style.left = rx + 'px'; ringEl.style.top = ry + 'px';
+            requestAnimationFrame(animateRing);
+        })();
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => { curEl.style.width='20px'; curEl.style.height='20px'; ringEl.style.width='56px'; ringEl.style.height='56px'; ringEl.style.opacity='0.9'; });
+            el.addEventListener('mouseleave', () => { curEl.style.width='10px'; curEl.style.height='10px'; ringEl.style.width='38px'; ringEl.style.height='38px'; ringEl.style.opacity='0.5'; });
+        });
+    </script>
+</body>
+</html>

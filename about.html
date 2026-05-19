@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="About Codexael Finds — who we are and what we do.">
+    <meta name="author" content="Codexael">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>About — Codexael Finds</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/codexael_icon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="page-styles.css">
+</head>
+<body>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+    <div class="grid-overlay"></div>
+    <div class="noise"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="page-wrap">
+
+        <div class="affiliate-notice">
+            ✦ Codexael Finds is a participant in the Amazon Services LLC Associates Program — we earn a commission at no extra cost to you ✦ &nbsp;|&nbsp; <a href="disclosure.html" class="notice-link">Full Disclosure</a> ✦
+        </div>
+
+        <header class="top-bar">
+            <div class="logo-wrap">
+                <a href="index.html" style="text-decoration:none;">
+                    <div class="logo-mark">Codex<span>ael</span></div>
+                    <span class="logo-sub">// Finds</span>
+                </a>
+            </div>
+            <nav class="top-bar-right">
+                <a href="about.html" class="nav-link" style="color:var(--accent)">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <div class="status-pill">
+                    <span class="status-dot"></span>
+                    Recently Added
+                </div>
+            </nav>
+        </header>
+
+        <main class="page-content">
+            <p class="page-eyebrow">// Who We Are</p>
+            <h1 class="page-title">About<br><span>Codexael.</span></h1>
+
+            <div class="page-section">
+                <h2>The Overlooked Shelf</h2>
+                <p>Codexael Finds exists for one reason: the internet is full of product lists that all look the same. The same bestsellers, the same top-ten roundups, the same algorithmic picks. We do something different.</p>
+                <p>We dig through what gets buried in search results — the underrated, the niche, the genuinely useful — and surface them here, curated with care and filtered ruthlessly.</p>
+            </div>
+
+            <hr class="page-divider">
+
+            <div class="page-section">
+                <h2>How We Pick</h2>
+                <p>Every product on Codexael Finds is hand-selected. We look for things that are:</p>
+                <ul>
+                    <li>Genuinely useful in real-world scenarios</li>
+                    <li>Under-the-radar — not the obvious top result</li>
+                    <li>Priced fairly relative to what they offer</li>
+                    <li>Interesting enough that we'd tell a friend about them</li>
+                </ul>
+                <p>We do not list products just because they pay the highest affiliate commission. The curation comes first.</p>
+            </div>
+
+            <hr class="page-divider">
+
+            <div class="page-section">
+                <h2>Affiliate Transparency</h2>
+                <p>Codexael Finds is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com.</p>
+                <p>When you click a link on this site and make a purchase, we may earn a small commission — at no extra cost to you. This is how we keep the lights on and continue finding things worth finding.</p>
+                <p>Read our full <a href="disclosure.html">Affiliate Disclosure</a> and <a href="privacy-policy.html">Privacy Policy</a> for complete details.</p>
+            </div>
+
+            <hr class="page-divider">
+
+            <div class="page-section">
+                <h2>Image Notice</h2>
+                <p>Images on this site may be digitally enhanced for promotional presentation purposes. Always refer to the product listing on Amazon for accurate product imagery.</p>
+            </div>
+
+            <hr class="page-divider">
+
+            <div class="page-section">
+                <h2>Get In Touch</h2>
+                <p>Have a product you think belongs here? A question? Just want to say hi? We actually read emails.</p>
+                <p><a href="contact.html">Head to the contact page →</a></p>
+            </div>
+        </main>
+
+        <footer class="bottom-bar">
+            <div class="footer-top">
+                <p class="footer-disclosure">Codexael Finds is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com.</p>
+                <p class="footer-image-notice">✦ Images may be digitally enhanced for promotional presentation purposes.</p>
+            </div>
+            <div class="footer-bottom">
+                <span class="copyright">© 2025 Codexael. All rights reserved.</span>
+                <nav class="footer-links">
+                    <a href="about.html" class="social-link">About</a>
+                    <a href="contact.html" class="social-link">Contact</a>
+                    <a href="privacy-policy.html" class="social-link">Privacy Policy</a>
+                    <a href="disclosure.html" class="social-link">Affiliate Disclosure</a>
+                    <a href="mailto:contact@codexael.com" class="social-link">Email</a>
+                </nav>
+                <span class="tagline">The Overlooked Shelf</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        const curEl = document.getElementById('cursor');
+        const ringEl = document.getElementById('cursorRing');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX; my = e.clientY;
+            curEl.style.left = mx + 'px'; curEl.style.top = my + 'px';
+        });
+        (function animateRing() {
+            rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+            ringEl.style.left = rx + 'px'; ringEl.style.top = ry + 'px';
+            requestAnimationFrame(animateRing);
+        })();
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => { curEl.style.width='20px'; curEl.style.height='20px'; ringEl.style.width='56px'; ringEl.style.height='56px'; ringEl.style.opacity='0.9'; });
+            el.addEventListener('mouseleave', () => { curEl.style.width='10px'; curEl.style.height='10px'; ringEl.style.width='38px'; ringEl.style.height='38px'; ringEl.style.opacity='0.5'; });
+        });
+    </script>
+</body>
+</html>
