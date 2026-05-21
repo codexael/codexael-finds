@@ -1,16 +1,20 @@
+/* ── common-script.js — shared across ALL pages ───────────── */
+
 (function () {
 
-    const PAGE_ID = document.body.dataset.page;
+    /* ── 1. Header & Footer Injection ────────────────────────── */
 
-    const AFFILIATE_NOTICE = `
-        <div class="affiliate-notice">
-            ✦ Codexael Finds is a participant in the Amazon Services LLC Associates Program — we earn a commission at no extra cost to you ✦ &nbsp;|&nbsp; <a href="disclosure.html" class="notice-link">Full Disclosure</a> ✦
-        </div>`;
+    const PAGE_ID = document.body.dataset.page || 'index';
 
     function navLink(href, id, label) {
         const active = PAGE_ID === id ? ' style="color:var(--accent)"' : '';
         return `<a href="${href}" class="nav-link"${active}>${label}</a>`;
     }
+
+    const AFFILIATE_NOTICE = `
+        <div class="affiliate-notice">
+            ✦ Codexael Finds is a participant in the Amazon Services LLC Associates Program — we earn a commission at no extra cost to you ✦ &nbsp;|&nbsp; <a href="disclosure.html" class="notice-link">Full Disclosure</a> ✦
+        </div>`;
 
     const HEADER = `
         <header class="top-bar">
@@ -63,9 +67,10 @@
     let mx = 0, my = 0, rx = 0, ry = 0;
 
     document.addEventListener('mousemove', e => {
-        mx = e.clientX; my = e.clientY;
-        curEl.style.left  = mx + 'px';
-        curEl.style.top   = my + 'px';
+        mx = e.clientX;
+        my = e.clientY;
+        curEl.style.left = mx + 'px';
+        curEl.style.top  = my + 'px';
     });
 
     (function animateRing() {
@@ -76,7 +81,8 @@
         requestAnimationFrame(animateRing);
     })();
 
-    document.querySelectorAll('a, button').forEach(el => {
+    // Expose bigCursor globally so script.js can use it for dynamic elements
+    window.bigCursor = function (el) {
         el.addEventListener('mouseenter', () => {
             curEl.style.width    = '20px'; curEl.style.height   = '20px';
             ringEl.style.width   = '56px'; ringEl.style.height  = '56px';
@@ -87,7 +93,9 @@
             ringEl.style.width   = '38px'; ringEl.style.height  = '38px';
             ringEl.style.opacity = '0.5';
         });
-    });
+    };
+
+    document.querySelectorAll('a, button').forEach(window.bigCursor);
 
 
     /* ── 3. Scroll To Top ────────────────────────────────────── */
@@ -97,6 +105,7 @@
     sBtn.innerHTML = '↑';
     sBtn.title     = 'Back to top';
     document.body.appendChild(sBtn);
+    window.bigCursor(sBtn);
 
     window.addEventListener('scroll', () => {
         sBtn.classList.toggle('visible', window.scrollY > 300);

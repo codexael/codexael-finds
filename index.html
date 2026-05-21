@@ -31,16 +31,14 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 
-<body>
+<body data-page="index">
 
     <!-- ── Custom Cursor ── -->
     <div class="cursor" id="cursor"></div>
@@ -53,29 +51,6 @@
     <div class="blob blob-2"></div>
 
     <div class="page-wrap">
-
-        <!-- ── Affiliate Notice ── -->
-        <div class="affiliate-notice">
-            ✦ Codexael Finds is a participant in the Amazon Services LLC Associates Program — we earn a commission at no extra cost to you ✦ &nbsp;|&nbsp; <a href="disclosure.html" class="notice-link">Full Disclosure</a> ✦
-        </div>
-
-        <!-- ── Top Bar ── -->
-        <header class="top-bar">
-            <div class="logo-wrap">
-                <a href="index.html" style="text-decoration:none;">
-                    <div class="logo-mark">Codex<span>ael</span></div>
-                    <span class="logo-sub">// Finds</span>
-                </a>
-            </div>
-            <nav class="top-bar-right">
-                <a href="about.html" class="nav-link">About</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-                <div class="status-pill">
-                    <span class="status-dot"></span>
-                    Recently Added
-                </div>
-            </nav>
-        </header>
 
         <!-- ── Hero Strip ── -->
         <section class="hero-strip">
@@ -117,32 +92,25 @@
 
             <!-- Filter dropdowns -->
             <div class="dropdowns-group">
-
-                <!-- Category -->
                 <div class="filter-dropdown" id="dd-category">
                     <button class="fdd-btn" onclick="toggleDD('dd-category')">
                         Category <span class="fdd-chevron">▾</span>
                     </button>
                     <div class="fdd-panel" id="panel-category"></div>
                 </div>
-
-                <!-- Badge -->
                 <div class="filter-dropdown" id="dd-badge">
                     <button class="fdd-btn" onclick="toggleDD('dd-badge')">
                         Badge <span class="fdd-chevron">▾</span>
                     </button>
                     <div class="fdd-panel" id="panel-badge"></div>
                 </div>
-
-                <!-- Tag -->
                 <div class="filter-dropdown" id="dd-tag">
                     <button class="fdd-btn" onclick="toggleDD('dd-tag')">
                         Tag <span class="fdd-chevron">▾</span>
                     </button>
                     <div class="fdd-panel" id="panel-tag"></div>
                 </div>
-
-            </div><!-- /dropdowns-group -->
+            </div>
 
             <!-- Sort controls -->
             <div class="sort-wrap">
@@ -154,34 +122,28 @@
                 <button class="sort-btn" data-sort="price-desc" onclick="setSort(this)">Price ↓</button>
             </div>
 
-        </div><!-- /controls-bar -->
+        </div>
 
         <!-- ── Active Filter Chips ── -->
         <div class="chips-bar" id="chipsBar"></div>
 
         <!-- ── Products ── -->
         <main class="products-section">
-
             <div class="section-head">
                 <span class="section-head-label">// Picks</span>
                 <div class="section-head-line"></div>
                 <span class="section-head-label" id="pickCount">12 Items</span>
             </div>
-
             <div class="products-grid" id="productsGrid">
-                <!-- Cards are injected by app.js -->
                 <div class="empty-state" id="emptyState">
                     <div class="empty-icon">⊘</div>
                     <div class="empty-title">No Picks Found</div>
                     <div class="empty-sub">Try adjusting filters or clearing the search</div>
                 </div>
             </div>
-
-            <!-- Lazy-load trigger + spinner -->
             <div class="load-sentinel" id="loadSentinel">
                 <div class="load-spinner" id="loadSpinner"></div>
             </div>
-
         </main>
 
         <!-- ── Marquee ── -->
@@ -189,36 +151,10 @@
             <div class="marquee-track" id="marqueeTrack"></div>
         </div>
 
-        <!-- ── Footer ── -->
-        <footer class="bottom-bar">
-            <div class="footer-top">
-                <p class="footer-disclosure">
-                    Codexael Finds is a participant in the Amazon Services LLC Associates Program, an affiliate
-                    advertising program designed to provide a means for sites to earn advertising fees by advertising
-                    and linking to Amazon.com.
-                </p>
-                <p class="footer-image-notice">
-                    ✦ Images may be digitally enhanced for promotional presentation purposes.
-                </p>
-            </div>
-            <div class="footer-bottom">
-                <span class="copyright">© 2025 Codexael. All rights reserved.</span>
-                <nav class="footer-links">
-                    <a href="index.html" class="social-link">Finds</a>
-                    <a href="about.html" class="social-link">About</a>
-                    <a href="contact.html" class="social-link">Contact</a>
-                    <a href="privacy-policy.html" class="social-link">Privacy Policy</a>
-                    <a href="disclosure.html" class="social-link">Affiliate Disclosure</a>
-                    <a href="mailto:contact@codexael.com" class="social-link">Email</a>
-                </nav>
-                <span class="tagline">The Overlooked Shelf</span>
-            </div>
-        </footer>
-
     </div><!-- /page-wrap -->
 
-    <!-- App logic -->
-    <script src="script.js"></script>
+    <script src="common-script.js"></script>
+    <script src="index-script.js"></script>
 
 </body>
 
