@@ -14,8 +14,6 @@ const PRODUCTS = [
         discount: 72,
         desc: 'A realistic sleeping cat plush toy with soft premium fur and calming breathing sound effects. Perfect as a stress-relief companion, cute desk decor, or a cozy gift for kids and cat lovers.',
         tags: ['Soft Toy', 'Cat Plush', 'Sound Effect', 'Stress Relief', 'Kids Gift', 'Desk Decor'],
-        icon: '🐱',
-        bg: 'linear-gradient(135deg,#c79b6e,#8b5e3c)',
         link: 'https://amzn.to/3PqDIub'
     }
 ];
@@ -388,6 +386,8 @@ function buildCard(p) {
     article.className = 'product-card';
     article.dataset.id = p.id;
 
+    const imgPath = `assets/images/products/${p.id}.png`;
+
     const badgeHTML = p.badge
         ? `<span class="product-badge badge-${p.badge}">${BADGE_ICONS[p.badge]} ${BADGE_LABELS[p.badge]}</span>`
         : '';
@@ -405,12 +405,14 @@ function buildCard(p) {
         : '';
 
     article.innerHTML = `
-    ${badgeHTML}
     <div class="product-img-wrap">
-      <div class="img-placeholder" style="background:${p.bg}">${p.icon}</div>
+      <img class="product-img" src="${imgPath}" alt="${p.name}" loading="lazy">
     </div>
     <div class="product-body">
-      <span class="product-category">${p.catLabel}</span>
+      <div class="product-meta">
+        <span class="product-category">${p.catLabel}</span>
+        ${badgeHTML}
+      </div>
       <h2 class="product-name">${p.name}</h2>
       <p class="product-desc">${p.desc}</p>
       <div class="product-tags">${tagsHTML}</div>
@@ -592,7 +594,7 @@ modalOverlay.innerHTML = `
   <div class="modal-card" id="modalCard">
     <button class="modal-close" id="modalClose">✕</button>
     <div class="modal-img-wrap">
-      <div class="modal-img-placeholder" id="modalImg"></div>
+      <img class="modal-img" id="modalImg" src="" alt="">
     </div>
     <div class="modal-body">
       <div class="modal-meta">
@@ -626,14 +628,14 @@ bigCursor(modalClose);
 bigCursor(document.getElementById('modalCta'));
 
 function openModal(p) {
-    // Populate
-    document.getElementById('modalImg').style.background = p.bg;
-    document.getElementById('modalImg').textContent = p.icon;
+    const imgPath = `assets/images/products/${p.id}.png`;
+    document.getElementById('modalImg').src = imgPath;
+    document.getElementById('modalImg').alt = p.name;
     document.getElementById('modalCategory').textContent = p.catLabel;
 
     const badgeEl = document.getElementById('modalBadge');
     if (p.badge) {
-        badgeEl.textContent = BADGE_LABELS[p.badge];
+        badgeEl.innerHTML = `${BADGE_ICONS[p.badge]} ${BADGE_LABELS[p.badge]}`;
         badgeEl.className = `modal-badge badge-${p.badge}`;
         badgeEl.style.display = '';
     } else {
