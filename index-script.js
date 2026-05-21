@@ -386,13 +386,21 @@ function buildCard(p) {
           ${discountHTML}
         </div>
       </div>
-      <a href="${p.link}" class="product-cta" target="_blank" rel="noopener noreferrer">Get It <span class="cta-arrow">→</span></a>
+      <div class="product-actions">
+        <button class="share-btn" data-id="${p.id}" title="Share product"><i class="fa-solid fa-share-nodes"></i></button>
+        <a href="${p.link}" class="product-cta" target="_blank" rel="noopener noreferrer">Get It <span class="cta-arrow">→</span></a>
+      </div>
     </div>
   `;
 
-    // Open modal on card click (but not when clicking the CTA button)
+    // Share button
+    const shareBtn = article.querySelector('.share-btn');
+    shareBtn.addEventListener('click', e => { e.stopPropagation(); openShareSheet(p); });
+    bigCursor(shareBtn);
+
+    // Open modal on card click (but not when clicking CTA or share button)
     article.addEventListener('click', e => {
-        if (e.target.closest('.product-cta')) return;
+        if (e.target.closest('.product-cta') || e.target.closest('.share-btn')) return;
         openModal(p);
     });
 
@@ -561,9 +569,12 @@ modalOverlay.innerHTML = `
           <span class="modal-discount" id="modalDiscount"></span>
         </div>
       </div>
-      <a class="modal-cta" id="modalCta" target="_blank" rel="noopener noreferrer">
-        View on Amazon <span>→</span>
-      </a>
+      <div class="modal-actions">
+        <button class="modal-share-btn" id="modalShareBtn" title="Share product"><i class="fa-solid fa-share-nodes"></i> Share</button>
+        <a class="modal-cta" id="modalCta" target="_blank" rel="noopener noreferrer">
+          View on Amazon <span>→</span>
+        </a>
+      </div>
     </div>
   </div>
 `;
@@ -571,10 +582,19 @@ document.body.appendChild(modalOverlay);
 
 const modalCard    = document.getElementById('modalCard');
 const modalClose   = document.getElementById('modalClose');
+const modalShareBtn = document.getElementById('modalShareBtn');
 bigCursor(modalClose);
 bigCursor(document.getElementById('modalCta'));
+bigCursor(modalShareBtn);
+
+let _modalProduct = null;
+
+modalShareBtn.addEventListener('click', () => {
+    if (_modalProduct) openShareSheet(_modalProduct);
+});
 
 function openModal(p) {
+    _modalProduct = p;
     const imgPath = `assets/images/products/${p.id}.png`;
     document.getElementById('modalImg').src = imgPath;
     document.getElementById('modalImg').alt = p.name;
@@ -626,6 +646,115 @@ document.addEventListener('keydown', e => {
 });
 
 
-/* ── 17. Init ────────────────────────────────────────────── */
+/* ── 17. Share Sheet ─────────────────────────────────────── */
+
+const shareSheet = document.createElement('div');
+shareSheet.className = 'share-sheet';
+shareSheet.innerHTML = `
+  <div class="share-sheet-card">
+    <div class="share-sheet-header">
+      <span class="share-sheet-title">Share This Pick</span>
+      <button class="share-sheet-close" id="shareSheetClose">✕</button>
+    </div>
+    <div class="share-copy-row">
+      <input class="share-url-input" id="shareUrlInput" type="text" readonly>
+      <button class="share-copy-btn" id="shareCopyBtn">Copy</button>
+    </div>
+    <p class="share-via-label">Share via</p>
+    <div class="share-options">
+      <a class="share-option whatsapp" id="shareWhatsapp" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span>
+      </a>
+      <a class="share-option instagram" id="shareInstagram" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-instagram"></i><span>Instagram</span>
+      </a>
+      <a class="share-option twitter" id="shareTwitter" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-x-twitter"></i><span>X / Twitter</span>
+      </a>
+      <a class="share-option telegram" id="shareTelegram" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-telegram"></i><span>Telegram</span>
+      </a>
+      <button class="share-option native" id="shareNative">
+        <i class="fa-solid fa-arrow-up-from-bracket"></i><span>More</span>
+      </button>
+    </div>
+  </div>
+`;
+document.body.appendChild(shareSheet);
+bigCursor(document.getElementById('shareSheetClose'));
+bigCursor(document.getElementById('shareCopyBtn'));
+
+function openShareSheet(p) {
+    const url = `${location.origin}${location.pathname}?product=${p.id}`;
+    const text = `Check out "${p.name}" — ${p.pDisplay} on Codexael Finds!`;
+
+    document.getElementById('shareUrlInput').value = url;
+    document.getElementById('shareCopyBtn').textContent = 'Copy';
+
+    document.getElementById('shareWhatsapp').href =
+        `https://wa.me/?text=${encodeURIComponent(text + '\n' + url)}`;
+    document.getElementById('shareTwitter').href =
+        `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    document.getElementById('shareTelegram').href =
+        `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+
+    // Instagram doesn't support direct web share links — open profile instead
+    document.getElementById('shareInstagram').href = `https://www.instagram.com/`;
+
+    document.getElementById('shareNative').onclick = () => {
+        if (navigator.share) {
+            navigator.share({ title: p.name, text, url }).catch(() => {});
+        } else {
+            navigator.clipboard.writeText(url);
+        }
+    };
+
+    shareSheet.classList.add('open');
+}
+
+function closeShareSheet() {
+    shareSheet.classList.remove('open');
+}
+
+document.getElementById('shareSheetClose').addEventListener('click', closeShareSheet);
+shareSheet.addEventListener('click', e => {
+    if (!e.target.closest('.share-sheet-card')) closeShareSheet();
+});
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeShareSheet();
+});
+
+document.getElementById('shareCopyBtn').addEventListener('click', () => {
+    const input = document.getElementById('shareUrlInput');
+    navigator.clipboard.writeText(input.value).then(() => {
+        const btn = document.getElementById('shareCopyBtn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+});
+
+
+/* ── 18. URL Deep-link Handler ───────────────────────────── */
+
+(function handleDeepLink() {
+    const params = new URLSearchParams(location.search);
+    const rawId = params.get('product');
+    if (!rawId) return;
+
+    const id = parseInt(rawId, 10);
+    const product = PRODUCTS.find(p => p.id === id);
+
+    if (!product) {
+        // Invalid id — clean URL and stay on index
+        history.replaceState(null, '', location.pathname);
+        return;
+    }
+
+    // Valid — open modal directly after render
+    setTimeout(() => openModal(product), 300);
+})();
+
+
+/* ── 19. Init ────────────────────────────────────────────── */
 
 run();
