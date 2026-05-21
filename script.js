@@ -11,6 +11,7 @@ const PRODUCTS = [
         pLabel: 'Now At',
         pDisplay: '₹249',
         pOld: '₹899',
+        discount: 72,
         desc: 'A realistic sleeping cat plush toy with soft premium fur and calming breathing sound effects. Perfect as a stress-relief companion, cute desk decor, or a cozy gift for kids and cat lovers.',
         tags: ['Soft Toy', 'Cat Plush', 'Sound Effect', 'Stress Relief', 'Kids Gift', 'Desk Decor'],
         icon: '🐱',
@@ -399,6 +400,10 @@ function buildCard(p) {
         ? `<span class="price-old">${p.pOld}</span>`
         : '';
 
+    const discountHTML = p.discount
+        ? `<span class="price-discount">−${p.discount}%</span>`
+        : '';
+
     article.innerHTML = `
     ${badgeHTML}
     <div class="product-img-wrap">
@@ -416,11 +421,18 @@ function buildCard(p) {
         <div class="price-row">
           <span class="price-value">${p.pDisplay}</span>
           ${oldPriceHTML}
+          ${discountHTML}
         </div>
       </div>
-      <a href="${p.link}" class="product-cta">Get It <span class="cta-arrow">→</span></a>
+      <a href="${p.link}" class="product-cta" target="_blank" rel="noopener noreferrer">Get It <span class="cta-arrow">→</span></a>
     </div>
   `;
+
+    // Open modal on card click (but not when clicking the CTA button)
+    article.addEventListener('click', e => {
+        if (e.target.closest('.product-cta')) return;
+        openModal(p);
+    });
 
     return article;
 }
@@ -553,6 +565,118 @@ const marqueeTrack = document.getElementById('marqueeTrack');
 });
 
 
-/* ── 15. Init ────────────────────────────────────────────── */
+/* ── 15. Scroll To Top ───────────────────────────────────── */
+
+const scrollBtn = document.createElement('button');
+scrollBtn.className = 'scroll-top-btn';
+scrollBtn.innerHTML = '↑';
+scrollBtn.title = 'Back to top';
+document.body.appendChild(scrollBtn);
+bigCursor(scrollBtn);
+
+window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 300);
+});
+
+scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+
+/* ── 16. Product Modal ───────────────────────────────────── */
+
+// Build modal DOM once
+const modalOverlay = document.createElement('div');
+modalOverlay.className = 'modal-overlay';
+modalOverlay.innerHTML = `
+  <div class="modal-card" id="modalCard">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-img-wrap">
+      <div class="modal-img-placeholder" id="modalImg"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-meta">
+        <span class="modal-category" id="modalCategory"></span>
+        <span class="modal-badge" id="modalBadge"></span>
+      </div>
+      <h2 class="modal-name" id="modalName"></h2>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-tags" id="modalTags"></div>
+    </div>
+    <div class="modal-footer">
+      <div class="modal-price-wrap">
+        <span class="modal-price-label" id="modalPriceLabel"></span>
+        <div class="modal-price-row">
+          <span class="modal-price-value" id="modalPrice"></span>
+          <span class="modal-price-old" id="modalOldPrice"></span>
+          <span class="modal-discount" id="modalDiscount"></span>
+        </div>
+      </div>
+      <a class="modal-cta" id="modalCta" target="_blank" rel="noopener noreferrer">
+        View on Amazon <span>→</span>
+      </a>
+    </div>
+  </div>
+`;
+document.body.appendChild(modalOverlay);
+
+const modalCard    = document.getElementById('modalCard');
+const modalClose   = document.getElementById('modalClose');
+bigCursor(modalClose);
+bigCursor(document.getElementById('modalCta'));
+
+function openModal(p) {
+    // Populate
+    document.getElementById('modalImg').style.background = p.bg;
+    document.getElementById('modalImg').textContent = p.icon;
+    document.getElementById('modalCategory').textContent = p.catLabel;
+
+    const badgeEl = document.getElementById('modalBadge');
+    if (p.badge) {
+        badgeEl.textContent = BADGE_LABELS[p.badge];
+        badgeEl.className = `modal-badge badge-${p.badge}`;
+        badgeEl.style.display = '';
+    } else {
+        badgeEl.style.display = 'none';
+    }
+
+    document.getElementById('modalName').textContent = p.name;
+    document.getElementById('modalDesc').textContent = p.desc;
+    document.getElementById('modalPriceLabel').textContent = p.pLabel;
+    document.getElementById('modalPrice').textContent = p.pDisplay;
+
+    const oldEl = document.getElementById('modalOldPrice');
+    oldEl.textContent = p.pOld || '';
+    oldEl.style.display = p.pOld ? '' : 'none';
+
+    const discEl = document.getElementById('modalDiscount');
+    discEl.textContent = p.discount ? `−${p.discount}%` : '';
+    discEl.style.display = p.discount ? '' : 'none';
+
+    document.getElementById('modalCta').href = p.link;
+
+    const tagsEl = document.getElementById('modalTags');
+    tagsEl.innerHTML = p.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
+
+    // Open
+    modalOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    modalOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+modalClose.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', e => {
+    if (!e.target.closest('#modalCard')) closeModal();
+});
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+});
+
+
+/* ── 17. Init ────────────────────────────────────────────── */
 
 run();

@@ -103,6 +103,7 @@
             <div class="footer-bottom">
                 <span class="copyright">© 2025 Codexael. All rights reserved.</span>
                 <nav class="footer-links">
+                    <a href="index.html" class="social-link">Finds</a>
                     <a href="about.html" class="social-link">About</a>
                     <a href="contact.html" class="social-link">Contact</a>
                     <a href="privacy-policy.html" class="social-link">Privacy Policy</a>
@@ -132,6 +133,14 @@
             el.addEventListener('mouseenter', () => { curEl.style.width='20px'; curEl.style.height='20px'; ringEl.style.width='56px'; ringEl.style.height='56px'; ringEl.style.opacity='0.9'; });
             el.addEventListener('mouseleave', () => { curEl.style.width='10px'; curEl.style.height='10px'; ringEl.style.width='38px'; ringEl.style.height='38px'; ringEl.style.opacity='0.5'; });
         });
+        // Scroll to top
+        const sBtn = document.createElement("button");
+        sBtn.className = "scroll-top-btn";
+        sBtn.innerHTML = "↑";
+        sBtn.title = "Back to top";
+        document.body.appendChild(sBtn);
+        window.addEventListener("scroll", () => sBtn.classList.toggle("visible", window.scrollY > 300));
+        sBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
     </script>
 </body>
 </html>
