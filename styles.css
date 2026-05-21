@@ -1945,9 +1945,3 @@ body {
         max-width: 100%;
     }
 }
-
-/* Price hidden state */
-.product-price-hidden {
-    display: flex;
-    align-items: center;
-}
