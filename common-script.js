@@ -62,27 +62,14 @@
 
     /* ── 2. Custom Cursor ────────────────────────────────────── */
 
+    const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
     const curEl  = document.getElementById('cursor');
     const ringEl = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
 
-    document.addEventListener('mousemove', e => {
-        mx = e.clientX;
-        my = e.clientY;
-        curEl.style.left = mx + 'px';
-        curEl.style.top  = my + 'px';
-    });
-
-    (function animateRing() {
-        rx += (mx - rx) * 0.12;
-        ry += (my - ry) * 0.12;
-        ringEl.style.left = rx + 'px';
-        ringEl.style.top  = ry + 'px';
-        requestAnimationFrame(animateRing);
-    })();
-
-    // Expose bigCursor globally so script.js can use it for dynamic elements
+    // Expose bigCursor globally — no-op on touch devices
     window.bigCursor = function (el) {
+        if (isTouchDevice) return;
         el.addEventListener('mouseenter', () => {
             curEl.style.width    = '20px'; curEl.style.height   = '20px';
             ringEl.style.width   = '56px'; ringEl.style.height  = '56px';
@@ -95,7 +82,26 @@
         });
     };
 
-    document.querySelectorAll('a, button').forEach(window.bigCursor);
+    if (!isTouchDevice) {
+        let mx = 0, my = 0, rx = 0, ry = 0;
+
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX;
+            my = e.clientY;
+            curEl.style.left = mx + 'px';
+            curEl.style.top  = my + 'px';
+        });
+
+        (function animateRing() {
+            rx += (mx - rx) * 0.12;
+            ry += (my - ry) * 0.12;
+            ringEl.style.left = rx + 'px';
+            ringEl.style.top  = ry + 'px';
+            requestAnimationFrame(animateRing);
+        })();
+
+        document.querySelectorAll('a, button').forEach(window.bigCursor);
+    }
 
 
     /* ── 3. Scroll To Top ────────────────────────────────────── */

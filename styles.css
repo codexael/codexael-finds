@@ -64,6 +64,17 @@ body {
     opacity: 0.5;
 }
 
+@media (hover: none) and (pointer: coarse) {
+    .cursor,
+    .cursor-ring {
+        display: none !important;
+    }
+
+    body {
+        cursor: auto;
+    }
+}
+
 
 /* ── 3. Atmosphere ───────────────────────────────────────── */
 
