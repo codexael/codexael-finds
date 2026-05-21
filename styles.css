@@ -1730,7 +1730,169 @@ body {
 .share-option.native:hover    { border-color: var(--accent); color: var(--accent); background: rgba(232,255,0,0.06); }
 
 
-/* ── 24. Responsive ──────────────────────────────────────── */
+/* ── 24. 404 Page ────────────────────────────────────────── */
+
+.not-found-wrap {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 6rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.nf-code-line {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.5s ease both;
+}
+
+.nf-err-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: #ff4d4d;
+    background: rgba(255, 77, 77, 0.1);
+    border: 1px solid rgba(255, 77, 77, 0.25);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+}
+
+.nf-err-num {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+}
+
+.nf-headline {
+    font-family: var(--font-hero);
+    font-size: clamp(5rem, 16vw, 12rem);
+    line-height: 0.88;
+    color: var(--text);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.5s 0.1s ease both;
+}
+
+.nf-accent {
+    color: var(--accent);
+}
+
+.nf-sub {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.85;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.5s 0.2s ease both;
+}
+
+.nf-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.5s 0.3s ease both;
+}
+
+.nf-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    background: var(--accent);
+    border: none;
+    padding: 0.9rem 2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.nf-btn-primary:hover {
+    background: var(--accent2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 255, 224, 0.2);
+}
+
+.nf-btn-secondary {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.nf-btn-secondary:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.nf-glitch {
+    position: absolute;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-hero);
+    font-size: clamp(14rem, 30vw, 26rem);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(232, 255, 0, 0.06);
+    pointer-events: none;
+    user-select: none;
+    animation: nfGlitch 4s infinite;
+    z-index: 0;
+}
+
+@keyframes nfGlitch {
+    0%, 90%, 100% {
+        clip-path: none;
+        transform: translateY(-50%) translateX(0);
+        -webkit-text-stroke-color: rgba(232, 255, 0, 0.06);
+    }
+    92% {
+        clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+        transform: translateY(-50%) translateX(-6px);
+        -webkit-text-stroke-color: rgba(255, 77, 77, 0.15);
+    }
+    94% {
+        clip-path: polygon(0 55%, 100% 55%, 100% 75%, 0 75%);
+        transform: translateY(-50%) translateX(6px);
+        -webkit-text-stroke-color: rgba(0, 255, 224, 0.15);
+    }
+    96% {
+        clip-path: none;
+        transform: translateY(-50%) translateX(0);
+        -webkit-text-stroke-color: rgba(232, 255, 0, 0.06);
+    }
+}
+
+@media (max-width: 768px) {
+    .not-found-wrap {
+        padding: 4rem 1.5rem 3rem;
+    }
+    .nf-glitch {
+        right: -4rem;
+        opacity: 0.5;
+    }
+}
+
+
+/* ── 25. Responsive ──────────────────────────────────────── */
 
 @media (max-width: 900px) {
     .sort-wrap {
