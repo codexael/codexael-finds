@@ -1032,6 +1032,11 @@ body {
     text-decoration: line-through;
 }
 
+.product-price-hidden {
+    display: flex;
+    align-items: center;
+}
+
 /* CTA button */
 .product-cta {
     display: inline-flex;
