@@ -1512,6 +1512,11 @@ body {
     align-self: center;
 }
 
+/* Price hidden state */
+.product-price-hidden {
+    display: flex;
+    align-items: center;
+}
 
 /* ── 23. Share Button & Sheet ────────────────────────────── */
 

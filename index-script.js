@@ -19,6 +19,16 @@ const PRODUCTS = [
 ];
 
 
+/* ── Global Config ───────────────────────────────────────── */
+
+/**
+ * Set to true when you are able to maintain live product prices.
+ * false → hides all price info (new price, old price, discount) across
+ *         cards, modal, and share messages.
+ */
+const SHOW_PRODUCT_PRICE = false;
+
+
 /* ── 2. App State ────────────────────────────────────────── */
 
 const state = {
@@ -356,13 +366,25 @@ function buildCard(p) {
         .map(t => `<span class="product-tag">${t}</span>`)
         .join('');
 
-    const oldPriceHTML = p.pOld
+    const oldPriceHTML = (SHOW_PRODUCT_PRICE && p.pOld)
         ? `<span class="price-old">${p.pOld}</span>`
         : '';
 
-    const discountHTML = p.discount
+    const discountHTML = (SHOW_PRODUCT_PRICE && p.discount)
         ? `<span class="price-discount">−${p.discount}%</span>`
         : '';
+
+    const priceBlockHTML = SHOW_PRODUCT_PRICE
+        ? `<div class="product-price">
+            <span class="price-label">${p.pLabel}</span>
+            <div class="price-row">
+              <span class="price-value">${p.pDisplay}</span>
+              ${oldPriceHTML}
+              ${discountHTML}
+            </div>
+          </div>`
+        : `<div class="product-price-hidden">
+          </div>`;
 
     article.innerHTML = `
     <div class="product-img-wrap">
@@ -378,14 +400,7 @@ function buildCard(p) {
       <div class="product-tags">${tagsHTML}</div>
     </div>
     <div class="product-footer">
-      <div class="product-price">
-        <span class="price-label">${p.pLabel}</span>
-        <div class="price-row">
-          <span class="price-value">${p.pDisplay}</span>
-          ${oldPriceHTML}
-          ${discountHTML}
-        </div>
-      </div>
+      ${priceBlockHTML}
       <div class="product-actions">
         <button class="share-btn" data-id="${p.id}" title="Share product"><i class="fa-solid fa-share-nodes"></i></button>
         <a href="${p.link}" class="product-cta" target="_blank" rel="noopener noreferrer">Get It <span class="cta-arrow">→</span></a>
@@ -611,16 +626,23 @@ function openModal(p) {
 
     document.getElementById('modalName').textContent = p.name;
     document.getElementById('modalDesc').textContent = p.desc;
-    document.getElementById('modalPriceLabel').textContent = p.pLabel;
-    document.getElementById('modalPrice').textContent = p.pDisplay;
 
-    const oldEl = document.getElementById('modalOldPrice');
-    oldEl.textContent = p.pOld || '';
-    oldEl.style.display = p.pOld ? '' : 'none';
+    const modalPriceWrap = document.querySelector('.modal-price-wrap');
+    if (SHOW_PRODUCT_PRICE) {
+        modalPriceWrap.style.display = '';
+        document.getElementById('modalPriceLabel').textContent = p.pLabel;
+        document.getElementById('modalPrice').textContent = p.pDisplay;
 
-    const discEl = document.getElementById('modalDiscount');
-    discEl.textContent = p.discount ? `−${p.discount}%` : '';
-    discEl.style.display = p.discount ? '' : 'none';
+        const oldEl = document.getElementById('modalOldPrice');
+        oldEl.textContent = p.pOld || '';
+        oldEl.style.display = p.pOld ? '' : 'none';
+
+        const discEl = document.getElementById('modalDiscount');
+        discEl.textContent = p.discount ? `−${p.discount}%` : '';
+        discEl.style.display = p.discount ? '' : 'none';
+    } else {
+        modalPriceWrap.innerHTML = ``;
+    }
 
     document.getElementById('modalCta').href = p.link;
 
@@ -686,7 +708,9 @@ bigCursor(document.getElementById('shareCopyBtn'));
 
 function openShareSheet(p) {
     const url = `${location.origin}${location.pathname}?product=${p.id}`;
-    const text = `Check out "${p.name}" — ${p.pDisplay} on Codexael Finds!`;
+    const text = SHOW_PRODUCT_PRICE
+        ? `Check out "${p.name}" — ${p.pDisplay} on Codexael Finds!`
+        : `Check out "${p.name}" on Codexael Finds!`;
 
     document.getElementById('shareUrlInput').value = url;
     document.getElementById('shareCopyBtn').textContent = 'Copy';
