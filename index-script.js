@@ -829,7 +829,7 @@ function openShareSheet(p) {
     const desc  = p.desc.length > 200 ? p.desc.slice(0, 197) + '...' : p.desc;
 
     // WhatsApp / Telegram — multi-line with description
-    const longText = `✦ *${p.name}*${pricePart}\n\n${desc}\n\n🔗 ${url}`;
+    const longText = `✦ *${p.name}*${pricePart}\n\n${desc}\n\n${url}`;
 
     // Twitter — tighter, fits character limit
     const tweetText = SHOW_PRODUCT_PRICE
