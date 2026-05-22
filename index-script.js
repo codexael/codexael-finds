@@ -820,29 +820,62 @@ bigCursor(document.getElementById('shareSheetClose'));
 bigCursor(document.getElementById('shareCopyBtn'));
 
 function openShareSheet(p) {
-    const url = `${location.origin}${location.pathname}?product=${encodeURIComponent(p.id)}`;
-    const text = SHOW_PRODUCT_PRICE
-        ? `Check out "${p.name}" — ${p.pDisplay} on Codexael Finds!`
-        : `Check out "${p.name}" on Codexael Finds!`;
+    const url  = `${location.origin}${location.pathname}?product=${encodeURIComponent(p.id)}`;
+    const imgPath = `${location.origin}/${`assets/images/products/${p.id}.png`}`;
+
+    // ── Compose share text ──────────────────────────────────
+    const pricePart = SHOW_PRODUCT_PRICE ? ` — ${p.pDisplay}` : '';
+    const title = `${p.name}${pricePart} | Codexael Finds`;
+    const desc  = p.desc.length > 200 ? p.desc.slice(0, 197) + '...' : p.desc;
+
+    // WhatsApp / Telegram — multi-line with description
+    const longText = `✦ *${p.name}*${pricePart}\n\n${desc}\n\n🔗 ${url}`;
+
+    // Twitter — tighter, fits character limit
+    const tweetText = SHOW_PRODUCT_PRICE
+        ? `"${p.name}" — ${p.pDisplay}\n\n${desc.slice(0, 120)}...\n\nvia @codexael`
+        : `"${p.name}"\n\n${desc.slice(0, 140)}...\n\nvia @codexael`;
 
     document.getElementById('shareUrlInput').value = url;
     document.getElementById('shareCopyBtn').textContent = 'Copy';
 
+    // WhatsApp — includes name + description + link
     document.getElementById('shareWhatsapp').href =
-        `https://wa.me/?text=${encodeURIComponent(text + '\n' + url)}`;
-    document.getElementById('shareTwitter').href =
-        `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
-    document.getElementById('shareTelegram').href =
-        `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+        `https://wa.me/?text=${encodeURIComponent(longText)}`;
 
-    // Instagram doesn't support direct web share links — open profile instead
+    // Twitter — description trimmed to fit tweet limit
+    document.getElementById('shareTwitter').href =
+        `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(url)}`;
+
+    // Telegram — includes name + description + link
+    document.getElementById('shareTelegram').href =
+        `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(`✦ ${p.name}${pricePart}\n\n${desc}`)}`;
+
+    // Instagram — no web share API, open instagram instead
     document.getElementById('shareInstagram').href = `https://www.instagram.com/`;
 
-    document.getElementById('shareNative').onclick = () => {
+    // Web Share API — passes image file where browser supports it
+    document.getElementById('shareNative').onclick = async () => {
         if (navigator.share) {
-            navigator.share({ title: p.name, text, url }).catch(() => {});
+            // Try to fetch and share the actual product image as a file
+            try {
+                const response = await fetch(imgPath);
+                const blob     = await response.blob();
+                const file     = new File([blob], `${p.id}.png`, { type: blob.type });
+
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    await navigator.share({ title, text: `${desc}\n\n${url}`, files: [file] });
+                } else {
+                    // Image sharing not supported — share text + url only
+                    await navigator.share({ title, text: desc, url });
+                }
+            } catch {
+                // Fetch failed or share cancelled — fallback to text share
+                try { await navigator.share({ title, text: desc, url }); } catch {}
+            }
         } else {
-            navigator.clipboard.writeText(url);
+            // No Web Share API — copy full text to clipboard
+            navigator.clipboard.writeText(`${title}\n\n${desc}\n\n${url}`);
         }
     };
 
