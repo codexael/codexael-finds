@@ -361,8 +361,10 @@ function run() {
     let result = PRODUCTS.filter(product => {
         // Full-text search across name and tags
         if (state.search) {
-            const haystack = product.name.toLowerCase();
-            if (!haystack.includes(state.search)) return false;
+            const q = state.search.trim().toLowerCase();
+            const matchesName = product.name.toLowerCase().includes(q);
+            const matchesId   = product.id.toLowerCase() === q;
+            if (!matchesName && !matchesId) return false;
         }
 
         // Category filter
