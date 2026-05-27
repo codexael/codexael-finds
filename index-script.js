@@ -1,137 +1,3 @@
-/* ── 1. Product Data ─────────────────────────────────────── */
-
-const PRODUCTS = [
-    {
-        id: 'CX-26-001',
-        name: 'Sleeping Cat Plush Toy',
-        category: 'toys-games',
-        catLabel: 'Toys & Games',
-        badge: 'deal',
-        price: 249,
-        pLabel: 'Now At',
-        pDisplay: '₹249',
-        pOld: '₹899',
-        discount: 72,
-        desc: 'A realistic sleeping cat plush toy with soft premium fur and calming breathing sound effects. Perfect as a stress-relief companion, cute desk decor, or a cozy gift for kids and cat lovers.',
-        tags: ['Soft Toy', 'Cat Plush', 'Sound Effect', 'Stress Relief', 'Kids Gift', 'Desk Decor'],
-        link: 'https://amzn.to/3PqDIub',
-        publishDate: '2026-05-22'
-    },
-    {
-        id: 'CX-26-002',
-        name: 'Portronics Clamp M5 Car Phone Holder',
-        category: 'mobile-accessories',
-        catLabel: 'Mobile Accessories',
-        badge: 'deal',
-        price: 336,
-        pLabel: 'Now At',
-        pDisplay: '₹336',
-        pOld: '₹999',
-        discount: 66,
-        desc: 'A sturdy shockproof car phone holder with powerful suction grip, 360° rotation, and single-hand operation. Keeps your smartphone secure and accessible even on rough drives.',
-        tags: ['Car Mount', '360 Rotation', 'Shockproof', 'Strong Grip', 'Hands-Free', 'Portronics'],
-        link: 'https://amzn.to/43lER9t',
-        publishDate: '2026-05-22'
-    },
-    {
-        id: 'CX-26-003',
-        name: 'Portronics Car Power 16 Fast Car Charger',
-        category: 'mobile-accessories',
-        catLabel: 'Mobile Accessories',
-        badge: 'deal',
-        price: 377,
-        pLabel: 'Now At',
-        pDisplay: '₹377',
-        pOld: '₹999',
-        discount: 62,
-        desc: 'A compact 51W dual-port fast car charger with 33W Type-C PD and 18W USB fast charging. Perfect for charging smartphones, tablets, and other devices quickly during travel or daily commutes.',
-        tags: ['Fast Charging', '51W Output', 'Type-C PD', 'Dual Port', 'Car Charger', 'Portronics'],
-        link: 'https://amzn.to/4wQ15hF',
-        publishDate: '2026-05-22'
-    },
-    {
-        id: 'CX-26-004',
-        name: 'WOSCHER AutoVac Pro Car Vacuum Cleaner',
-        category: 'car-accessories',
-        catLabel: 'Car Accessories',
-        badge: 'deal',
-        price: 1550,
-        pLabel: 'Now At',
-        pDisplay: '₹1550',
-        pOld: '₹2499',
-        discount: 38,
-        desc: 'A powerful 140W handheld car vacuum cleaner with 5000PA suction, washable HEPA filter, and multiple nozzle attachments for deep interior cleaning. Ideal for removing dust, pet hair, and debris from hard-to-reach areas.',
-        tags: ['Car Vacuum', '5000PA Suction', 'HEPA Filter', 'Portable', 'Deep Cleaning', 'WOSCHER'],
-        link: 'https://amzn.to/3Rqq5M2',
-        publishDate: '2026-05-22'
-    },
-    {
-        id: 'CX-26-005',
-        name: 'APPUCOCO Mini Car Trash Bin',
-        category: 'car-accessories',
-        catLabel: 'Car Accessories',
-        badge: 'deal',
-        price: 180,
-        pLabel: 'Now At',
-        pDisplay: '₹180',
-        pOld: '₹699',
-        discount: 74,
-        desc: 'A compact mini car trash bin designed to keep your car clean and organized. Fits easily in cup holders, car doors, or center consoles and can also be used as a desk organizer at home or office.',
-        tags: ['Car Dustbin', 'Compact Design', 'Cup Holder Fit', 'Organizer', 'Travel Essential', 'Portable'],
-        link: 'https://amzn.to/4v7iJMe',
-        publishDate: '2026-05-22'
-    },
-    {
-        id: 'CX-26-006',
-        name: 'DETACHI Car Tissue Holder',
-        category: 'car-accessories',
-        catLabel: 'Car Accessories',
-        badge: 'deal',
-        price: 261,
-        pLabel: 'Now At',
-        pDisplay: '₹261',
-        pOld: '₹999',
-        discount: 74,
-        desc: 'A premium faux leather car tissue holder designed to keep tissues easily accessible while driving. Clips securely onto sun visors, seat backs, or car doors for a cleaner and more organized interior.',
-        tags: ['Tissue Holder', 'Car Organizer', 'Faux Leather', 'Space Saving', 'Car Interior', 'DETACHI'],
-        link: 'https://amzn.to/3RA6R6H',
-        publishDate: '2026-05-22'
-    },
-    {
-        id: 'CX-26-007',
-        name: 'Godrej aer O Hanging Car Air Freshener Pack',
-        category: 'car-accessories',
-        catLabel: 'Car Accessories',
-        badge: 'hot',
-        price: 245,
-        pLabel: 'Now At',
-        pDisplay: '₹245',
-        pOld: '₹297',
-        discount: 18,
-        desc: 'A stylish hanging gel-based car air freshener pack with long-lasting fragrance for up to 30 days. Designed to keep your car fresh, odor-free, and pleasant during every drive.',
-        tags: ['Air Freshener', 'Long Lasting', 'Car Interior', 'Odor Control', 'Gel Freshener', 'Godrej'],
-        link: 'https://amzn.to/49iFcgO',
-        publishDate: '2026-05-22'
-    },
-    {
-        id: 'CX-26-008',
-        name: 'Yuoyar Magnetic Sunglasses Holder for Car',
-        category: 'car-accessories',
-        catLabel: 'Car Accessories',
-        badge: 'deal',
-        price: 289,
-        pLabel: 'Now At',
-        pDisplay: '₹289',
-        pOld: '₹999',
-        discount: 71,
-        desc: 'A premium magnetic leather sunglasses holder designed for car visors. Keeps your sunglasses secure, scratch-free, and easily accessible while driving with convenient single-hand operation.',
-        tags: ['Sunglasses Holder', 'Magnetic Clip', 'Car Organizer', 'Leather Finish', 'Visor Accessory', 'Yuoyar'],
-        link: 'https://amzn.to/4fzffNF',
-        publishDate: '2026-05-22'
-    }
-];
-
-
 /* ── Global Config ───────────────────────────────────────── */
 
 /**
@@ -503,7 +369,7 @@ function buildCard(p) {
 
     article.innerHTML = `
     <div class="product-img-wrap">
-      <img class="product-img" src="${imgPath}" alt="${p.name}" loading="lazy">
+      <img class="product-img" src="${imgPath}" alt="${p.name}" loading="lazy" onerror="this.src='assets/images/products/placeholder.png'; this.onerror=null;">
     </div>
     <div class="product-body">
       <div class="product-meta">
@@ -679,7 +545,7 @@ modalOverlay.innerHTML = `
   <div class="modal-card" id="modalCard">
     <button class="modal-close" id="modalClose">✕</button>
     <div class="modal-img-wrap">
-      <img class="modal-img" id="modalImg" src="" alt="">
+      <img class="modal-img" id="modalImg" src="" alt="" loading="lazy">
     </div>
     <div class="modal-body">
       <div class="modal-meta">
@@ -724,10 +590,14 @@ modalShareBtn.addEventListener('click', () => {
 });
 
 function openModal(p) {
-    _modalProduct = p;
     const imgPath = `assets/images/products/${p.id}.png`;
-    document.getElementById('modalImg').src = imgPath;
-    document.getElementById('modalImg').alt = p.name;
+    const modalImg = document.getElementById('modalImg');
+    modalImg.onerror = function () {
+        this.src = 'assets/images/products/placeholder.png';
+        this.onerror = null;
+    };
+    modalImg.src = imgPath;
+    modalImg.alt = p.name;
     document.getElementById('modalCategory').textContent = p.catLabel;
 
     const badgeEl = document.getElementById('modalBadge');
