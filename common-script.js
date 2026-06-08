@@ -52,6 +52,10 @@
                 </nav>
                 <span class="tagline">The Overlooked Shelf</span>
             </div>
+            <div class="footer-social">
+                <a href="https://www.instagram.com/codexaelfinds/" class="social-icon" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://wa.me/919898230144" class="social-icon" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
         </footer>`;
 
     const pageWrap = document.querySelector('.page-wrap');

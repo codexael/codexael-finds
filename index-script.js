@@ -7,6 +7,12 @@
  */
 const SHOW_PRODUCT_PRICE = false;
 
+/**
+ * Set to true when you want to allow search by tag filter.
+ * false → hides tag filter from product search
+ */
+const SHOW_TAG_FILTER = false;
+
 
 /* ── 2. App State ────────────────────────────────────────── */
 
@@ -793,6 +799,14 @@ document.getElementById('shareCopyBtn').addEventListener('click', () => {
     // Valid — open modal directly after render
     setTimeout(() => openModal(product), 300);
 })();
+
+
+/* ── Config: Tag Filter Visibility ────────────────────────── */
+
+// Show/hide tag filter based on SHOW_TAG_FILTER
+if (SHOW_TAG_FILTER) {
+    document.getElementById('dd-tag').style.display = '';
+}
 
 
 /* ── 19. Init ────────────────────────────────────────────── */
