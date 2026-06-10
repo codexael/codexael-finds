@@ -592,10 +592,14 @@ bigCursor(modalShareBtn);
 let _modalProduct = null;
 
 modalShareBtn.addEventListener('click', () => {
-    if (_modalProduct) openShareSheet(_modalProduct);
+    if (_modalProduct) {
+        closeModal();
+        openShareSheet(_modalProduct);
+    }
 });
 
 function openModal(p) {
+    _modalProduct = p;
     const imgPath = `assets/images/products/${p.id}.png`;
     const modalImg = document.getElementById('modalImg');
     modalImg.onerror = function () {
