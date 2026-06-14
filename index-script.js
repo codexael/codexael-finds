@@ -23,7 +23,7 @@ const state = {
     tags: new Set(),
     sort: 'default',
     page: 0,
-    perPage: 6,
+    perPage: 15,
     filtered: [...PRODUCTS],
 };
 
